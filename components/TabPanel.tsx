@@ -1,5 +1,4 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 interface TabPanelProps {
@@ -19,11 +18,7 @@ export default function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ py: 2 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ py: 2 }}>{children}</Box>}
     </div>
   );
 }
