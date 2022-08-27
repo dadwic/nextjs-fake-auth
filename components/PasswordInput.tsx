@@ -1,13 +1,12 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import type { TextFieldProps } from "@mui/material/TextField";
+import Input from "components/Input";
 
-export default function PasswordInput() {
+export default function PasswordInput(props: TextFieldProps) {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const handleClickShowPassword = () => {
@@ -19,25 +18,28 @@ export default function PasswordInput() {
   ) => event.preventDefault();
 
   return (
-    <FormControl fullWidth variant="outlined" margin="normal">
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-      <OutlinedInput
-        id="outlined-adornment-password"
-        type={showPassword ? "text" : "password"}
-        endAdornment={
+    <Input
+      required
+      fullWidth
+      label="Password"
+      name="password"
+      id="password"
+      margin="normal"
+      type={showPassword ? "text" : "password"}
+      InputProps={{
+        endAdornment: (
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
-              edge="end"
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
-        }
-        label="Password"
-      />
-    </FormControl>
+        ),
+      }}
+      {...props}
+    />
   );
 }

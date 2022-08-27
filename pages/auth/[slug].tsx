@@ -1,17 +1,9 @@
-import * as React from "react";
-import Head from "next/head";
+import React from "react";
 import type { NextPage } from "next";
-import SignInSide from "components/SignInSide";
+import AppLayout from "components/AppLayout";
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Sign In</title>
-      </Head>
-      <SignInSide />;
-    </>
-  );
+  return <AppLayout />;
 };
 
 export default Home;
