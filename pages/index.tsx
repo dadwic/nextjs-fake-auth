@@ -1,17 +1,40 @@
-import * as React from "react";
-import Head from "next/head";
+import React, { useEffect } from "react";
 import type { NextPage } from "next";
-import SignInSide from "components/SignInSide";
+import { useRouter } from "next/router";
+import { useStickyState } from "hooks";
+import Box from "@mui/material/Box";
+import NoSsr from "@mui/material/NoSsr";
+import CircularProgress from "components/CircularProgress";
 
-const Home: NextPage = () => {
+const Redirect = () => {
+  const [email, setEmail] = useStickyState("", "email");
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push(Boolean(email) ? "panel" : "/auth/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email]);
+
   return (
-    <>
-      <Head>
-        <title>Sign In</title>
-      </Head>
-      <SignInSide />;
-    </>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <CircularProgress />
+    </Box>
   );
 };
 
-export default Home;
+const Index: NextPage = () => {
+  return (
+    <NoSsr>
+      <Redirect />
+    </NoSsr>
+  );
+};
+
+export default Index;
