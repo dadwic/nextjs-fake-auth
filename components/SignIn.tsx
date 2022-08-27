@@ -42,7 +42,7 @@ export default function SignIn() {
 
   const onSubmit = (data: any) => {
     setLoading(true);
-    setEmail(data.email as string);
+    setEmail(data.email);
     enqueueSnackbar("You have successfully logged in.", { variant: "success" });
     // Redirect to panel after 3 seconds
     timer.current = window.setTimeout(() => {
