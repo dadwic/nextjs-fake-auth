@@ -1,9 +1,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { styled } from "@mui/material/styles";
-import MuiDrawer from "@mui/material/Drawer";
+import { styled, Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -16,11 +17,11 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./listItems";
 import CircularProgress from "components/CircularProgress";
 import Footer from "components/Footer";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import { mainListItems, secondaryListItems } from "./listItems";
 import { useStickyState } from "hooks";
 
 const Chart = dynamic(() => import("./Chart"), {
@@ -80,6 +81,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Dashboard() {
   const router = useRouter();
+  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const [email, setEmail] = useStickyState("email");
   const [open, setOpen] = React.useState(true);
   const isAuthenticated = Boolean(email);
@@ -95,6 +97,10 @@ export default function Dashboard() {
       router.push("/auth/login");
     }, 1000);
   };
+
+  React.useEffect(() => {
+    setOpen(!matches);
+  }, [matches]);
 
   React.useEffect(() => {
     return () => {
