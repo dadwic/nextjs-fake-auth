@@ -17,11 +17,13 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true,
     "paths": {
-      "utils/*": ["utils/*"],
+      "hooks": ["hooks"],
+      "utils": ["utils"],
+      "pages/*": ["pages/*"],
       "assets/*": ["assets/*"],
+      "interfaces": ["interfaces"],
       "constants/*": ["constants/*"],
-      "components/*": ["components/*"],
-      "interfaces/*": ["interfaces/*"]
+      "components/*": ["components/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts"],

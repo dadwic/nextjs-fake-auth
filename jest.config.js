@@ -11,9 +11,12 @@ const customJestConfig = {
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
     "^components/(.*)$": "<rootDir>/components/$1",
-    "^interfaces/(.*)$": "<rootDir>/interfaces/$1",
+    "^constants/(.*)$": "<rootDir>/constants/$1",
+    "^interfaces": "<rootDir>/interfaces",
+    "^assets/(.*)$": "<rootDir>/assets/$1",
     "^pages/(.*)$": "<rootDir>/pages/$1",
-    "^utils/(.*)$": "<rootDir>/utils/$1",
+    "^hooks": "<rootDir>/hooks",
+    "^utils": "<rootDir>/utils",
   },
   testEnvironment: "jest-environment-jsdom",
 };
