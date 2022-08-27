@@ -13,7 +13,6 @@ import TabPanel from "components/TabPanel";
 import Footer from "components/Footer";
 import SignIn from "components/SignIn";
 import SignUp from "components/SignUp";
-import { LoginFormInput } from "interfaces";
 import { a11yProps } from "utils";
 
 export default function AppLayout() {

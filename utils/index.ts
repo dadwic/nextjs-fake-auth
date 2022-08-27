@@ -23,6 +23,8 @@ export const theme = createTheme({
   },
 });
 
+export const isServer = typeof window === "undefined";
+
 // SWR fetcher
 export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 

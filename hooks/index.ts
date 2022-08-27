@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { isServer } from "utils";
 
-export function useStickyState(defaultValue: string, key: string) {
+export function useStickyState(key: string) {
   const [value, setValue] = useState(() => {
-    const stickyValue = window.localStorage.getItem(key);
-    return stickyValue !== null ? stickyValue : defaultValue;
+    const stickyValue = isServer ? "" : window.localStorage.getItem(key);
+    return stickyValue !== null ? stickyValue : "";
   });
   useEffect(() => {
-    window.localStorage.setItem(key, value);
+    if (!isServer) window.localStorage.setItem(key, value);
   }, [key, value]);
   return [value, setValue];
 }

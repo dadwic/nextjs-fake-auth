@@ -21,6 +21,7 @@ import CircularProgress from "components/CircularProgress";
 import Footer from "components/Footer";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import { useStickyState } from "hooks";
 
 const Chart = dynamic(() => import("./Chart"), {
   loading: () => <CircularProgress />,
@@ -79,18 +80,42 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Dashboard() {
   const router = useRouter();
+  const [email, setEmail] = useStickyState("email");
   const [open, setOpen] = React.useState(true);
+  const isAuthenticated = Boolean(email);
+  const timer = React.useRef<number>();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      window.localStorage.removeItem("email");
-      router.push("/");
-    }
+    setEmail("");
+    timer.current = window.setTimeout(() => {
+      router.push("/auth/login");
+    }, 1000);
   };
+
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
+
+  if (!isAuthenticated) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -161,6 +186,9 @@ export default function Dashboard() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography variant="h6">Logged in as {email}</Typography>
+            </Grid>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper
