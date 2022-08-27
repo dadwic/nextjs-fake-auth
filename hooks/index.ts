@@ -9,5 +9,5 @@ export function useStickyState(key: string) {
   useEffect(() => {
     if (!isServer) window.localStorage.setItem(key, value);
   }, [key, value]);
-  return [value, setValue];
+  return [value, setValue] as const;
 }
