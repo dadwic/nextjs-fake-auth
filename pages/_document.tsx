@@ -9,6 +9,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <title>Fake authentication for Next.js by Redux Persist</title>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="shortcut icon" href="/favicon.ico" />

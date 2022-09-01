@@ -14,6 +14,7 @@ import Footer from "components/Footer";
 import SignIn from "components/SignIn";
 import SignUp from "components/SignUp";
 import { a11yProps } from "utils";
+import { Typography } from "@mui/material";
 
 export default function AppLayout() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function AppLayout() {
         }}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <Container maxWidth="sm">
+        <Container maxWidth="xs">
           <Box
             sx={{
               my: 8,
@@ -62,20 +63,27 @@ export default function AppLayout() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ mb: 2, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Box
-              sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }}
+            <Typography variant="h4" gutterBottom>
+              Merhaba
+            </Typography>
+            <Typography
+              variant="body1"
+              fontWeight={400}
+              color="text.secondary"
+              align="center"
+              gutterBottom
             >
+              Lorem ipsum dolor sit amet consectetur adipiscing elit.
+            </Typography>
+            <Box sx={{ width: "100%" }}>
               <Tabs
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="Login" {...a11yProps(0)} />
-                <Tab label="Register" {...a11yProps(1)} />
+                <Tab label="Giriş Yap" {...a11yProps(0)} />
+                <Tab label="Üye Ol" {...a11yProps(1)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>

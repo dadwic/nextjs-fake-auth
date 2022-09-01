@@ -25,7 +25,11 @@
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.34.2",
+    "react-redux": "^8.0.2",
     "recharts": "^2.1.13",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

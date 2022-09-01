@@ -17,7 +17,7 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import CircularProgress from "components/CircularProgress";
+import LoadingOverlay from "components/LoadingOverlay";
 import Footer from "components/Footer";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
@@ -25,7 +25,7 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import { useStickyState } from "hooks";
 
 const Chart = dynamic(() => import("./Chart"), {
-  loading: () => <CircularProgress />,
+  // loading: () => <CircularProgress />,
   ssr: false,
 });
 
@@ -109,18 +109,7 @@ export default function Dashboard() {
   }, []);
 
   if (!isAuthenticated) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
+    return <LoadingOverlay />;
   }
 
   return (
