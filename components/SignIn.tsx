@@ -6,11 +6,8 @@ import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, FormProvider } from "react-hook-form";
 import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import LoadingOverlay from "components/LoadingOverlay";
 import PasswordInput from "components/PasswordInput";
 import Input from "components/Input";
 import Link from "components/Link";
@@ -19,7 +16,10 @@ import { useStickyState } from "hooks";
 
 const schema = yup
   .object({
-    email: yup.string().required().email(),
+    email: yup
+      .string()
+      .required()
+      .email("Lütfen gegerli bir e-mail adresi girin."),
     password: yup.string().required(),
   })
   .required();
@@ -51,10 +51,12 @@ export default function SignIn() {
     }, 3000);
   };
 
+  if (loading) return <LoadingOverlay />;
+
   return (
     <FormProvider {...methods}>
       <Head>
-        <title>Sign In</title>
+        <title>Giriş Yap</title>
       </Head>
       <Box
         component="form"
@@ -68,49 +70,19 @@ export default function SignIn() {
           margin="normal"
           id="email"
           type="email"
-          label="Email Address"
+          label="E-mail Adresin"
           name="email"
           autoComplete="email"
         />
         <PasswordInput />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
         <Box sx={{ position: "relative", my: 3 }}>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            disabled={loading}
-          >
-            Sign In
+          <Button fullWidth type="submit" variant="contained">
+            Giriş Yap
           </Button>
-          {loading && (
-            <CircularProgress
-              size={24}
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
-              }}
-            />
-          )}
         </Box>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="/auth/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-        </Grid>
+        <Link href="/auth/signup" variant="body2" display="block" align="right">
+          Şifremi Unuttum
+        </Link>
       </Box>
     </FormProvider>
   );

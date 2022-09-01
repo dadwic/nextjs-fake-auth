@@ -6,13 +6,24 @@ export const theme = createTheme({
   components: {
     MuiLink: {
       defaultProps: {
-        sx: { color: (t) => t.palette.common.black, textDecoration: "none" },
+        sx: { color: "common.black", textDecoration: "none" },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+          textAlign: "center",
+        },
+        shrink: {
+          textAlign: "left",
+        },
       },
     },
   },
   palette: {
     primary: {
-      main: "#d3a45d",
+      main: "#333131",
     },
     secondary: {
       main: "#3D74B8",

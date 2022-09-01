@@ -21,7 +21,7 @@ export default function PasswordInput(props: TextFieldProps) {
     <Input
       required
       fullWidth
-      label="Password"
+      label="Şifren"
       name="password"
       id="password"
       margin="normal"
