@@ -9,6 +9,15 @@ export const theme = createTheme({
         sx: { color: "common.black", textDecoration: "none" },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        fullWidth: {
+          margin: "24px 0",
+          borderRadius: 24,
+          height: 48,
+        },
+      },
+    },
     MuiInputLabel: {
       styleOverrides: {
         root: {

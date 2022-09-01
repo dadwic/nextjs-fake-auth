@@ -1,6 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { styled, Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -19,13 +19,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LoadingOverlay from "components/LoadingOverlay";
 import Footer from "components/Footer";
+import { mainListItems, secondaryListItems } from "./listItems";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
-import { mainListItems, secondaryListItems } from "./listItems";
-import { useStickyState } from "hooks";
+import { logout } from "hooks/store";
+import { State } from "interfaces";
 
 const Chart = dynamic(() => import("./Chart"), {
-  // loading: () => <CircularProgress />,
   ssr: false,
 });
 
@@ -80,37 +80,24 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Dashboard() {
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const email = useSelector((state: State) => state.email);
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
-  const [email, setEmail] = useStickyState("email");
   const [open, setOpen] = React.useState(true);
-  const isAuthenticated = Boolean(email);
-  const timer = React.useRef<number>();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   const handleLogout = () => {
-    setEmail("");
-    timer.current = window.setTimeout(() => {
-      router.push("/auth/login");
-    }, 1000);
+    dispatch(logout());
   };
 
   React.useEffect(() => {
     setOpen(!matches);
   }, [matches]);
 
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
-
-  if (!isAuthenticated) {
-    return <LoadingOverlay />;
-  }
+  if (!email) return <LoadingOverlay />;
 
   return (
     <Box sx={{ display: "flex" }}>

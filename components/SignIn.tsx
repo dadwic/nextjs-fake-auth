@@ -3,6 +3,7 @@ import * as yup from "yup";
 import Head from "next/head";
 import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, FormProvider } from "react-hook-form";
 import Button from "@mui/material/Button";
@@ -11,8 +12,8 @@ import LoadingOverlay from "components/LoadingOverlay";
 import PasswordInput from "components/PasswordInput";
 import Input from "components/Input";
 import Link from "components/Link";
+import { login } from "hooks/store";
 import { LoginFormInput } from "interfaces";
-import { useStickyState } from "hooks";
 
 const schema = yup
   .object({
@@ -29,7 +30,7 @@ export default function SignIn() {
   const timer = React.useRef<number>();
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = React.useState(false);
-  const [, setEmail] = useStickyState("email");
+  const dispatch = useDispatch();
   const methods = useForm<LoginFormInput>({
     resolver: yupResolver(schema),
   });
@@ -42,7 +43,7 @@ export default function SignIn() {
 
   const onSubmit = (data: any) => {
     setLoading(true);
-    setEmail(data.email);
+    dispatch(login(data.email));
     enqueueSnackbar("You have successfully logged in.", { variant: "success" });
     // Redirect to panel after 3 seconds
     timer.current = window.setTimeout(() => {
@@ -75,14 +76,12 @@ export default function SignIn() {
           autoComplete="email"
         />
         <PasswordInput />
-        <Box sx={{ position: "relative", my: 3 }}>
-          <Button fullWidth type="submit" variant="contained">
-            Giriş Yap
-          </Button>
-        </Box>
         <Link href="/auth/signup" variant="body2" display="block" align="right">
           Şifremi Unuttum
         </Link>
+        <Button fullWidth type="submit" variant="contained">
+          Giriş Yap
+        </Button>
       </Box>
     </FormProvider>
   );

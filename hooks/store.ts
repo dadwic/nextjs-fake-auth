@@ -16,22 +16,20 @@ export const actionTypes = {
 };
 
 // REDUCERS
-export const reducer = (state = exampleInitialState, action: Action) => {
-  switch (action.type) {
+export const reducer = (
+  state = exampleInitialState,
+  { type, ...action }: Action
+) => {
+  switch (type) {
     case actionTypes.LOGIN:
       return {
         ...state,
-        email: state.email,
+        ...action,
       };
     case actionTypes.LOGOUT:
       return {
         ...state,
-        count: null,
-      };
-    case actionTypes.LOGOUT:
-      return {
-        ...state,
-        count: exampleInitialState.email,
+        email: exampleInitialState.email,
       };
     default:
       return state;
@@ -43,14 +41,14 @@ export const logout = () => {
   return { type: actionTypes.LOGOUT };
 };
 
-export const login = (data: { email: string }) => {
-  return { type: actionTypes.LOGIN, data };
+export const login = (email: string) => {
+  return { type: actionTypes.LOGIN, email };
 };
 
 const persistConfig = {
-  key: "primary",
+  key: "root",
   storage,
-  whitelist: ["exampleData"], // place to select which state you want to persist
+  whitelist: ["email"], // place to select which state you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
