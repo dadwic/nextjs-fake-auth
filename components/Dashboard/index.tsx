@@ -18,9 +18,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listItems";
-import Footer from "components/Footer";
+import Unauthorized from "./Unauthorized";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import Footer from "components/Footer";
 import { logout } from "hooks/store";
 import { State } from "interfaces";
 
@@ -95,6 +96,8 @@ export default function Dashboard() {
   React.useEffect(() => {
     setOpen(!matches);
   }, [matches]);
+
+  if (!email) return <Unauthorized />;
 
   return (
     <Box sx={{ display: "flex" }}>
