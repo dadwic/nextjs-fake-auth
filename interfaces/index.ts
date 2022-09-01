@@ -1,3 +1,7 @@
+export type State = {
+  email: string;
+};
+
 export type LoginFormInput = {
   email: string;
   password: string;
