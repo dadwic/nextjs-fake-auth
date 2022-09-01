@@ -63,7 +63,7 @@ export default function AppLayout() {
               alignItems: "center",
             }}
           >
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" fontWeight={500} gutterBottom>
               Merhaba
             </Typography>
             <Typography

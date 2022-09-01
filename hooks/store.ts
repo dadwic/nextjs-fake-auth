@@ -1,3 +1,4 @@
+import type { State } from "interfaces";
 import { useMemo } from "react";
 import { createStore, applyMiddleware, Action } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -6,13 +7,15 @@ import storage from "redux-persist/lib/storage";
 
 let store: any;
 
-const exampleInitialState = {
+const exampleInitialState: State = {
   email: null,
+  loading: false,
 };
 
 export const actionTypes = {
   LOGIN: "LOGIN",
   LOGOUT: "LOGOUT",
+  LOADING: "LOADING",
 };
 
 // REDUCERS
@@ -25,11 +28,18 @@ export const reducer = (
       return {
         ...state,
         ...action,
+        loading: true,
+      };
+    case actionTypes.LOADING:
+      return {
+        ...state,
+        ...action,
       };
     case actionTypes.LOGOUT:
       return {
         ...state,
         email: exampleInitialState.email,
+        loading: exampleInitialState.loading,
       };
     default:
       return state;
@@ -39,6 +49,10 @@ export const reducer = (
 // ACTIONS
 export const logout = () => {
   return { type: actionTypes.LOGOUT };
+};
+
+export const setLoading = (loading: boolean) => {
+  return { type: actionTypes.LOADING, loading };
 };
 
 export const login = (email: string) => {
