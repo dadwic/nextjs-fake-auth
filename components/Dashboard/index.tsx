@@ -17,9 +17,8 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import LoadingOverlay from "components/LoadingOverlay";
-import Footer from "components/Footer";
 import { mainListItems, secondaryListItems } from "./listItems";
+import Footer from "components/Footer";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import { logout } from "hooks/store";
@@ -96,8 +95,6 @@ export default function Dashboard() {
   React.useEffect(() => {
     setOpen(!matches);
   }, [matches]);
-
-  if (!email) return <LoadingOverlay />;
 
   return (
     <Box sx={{ display: "flex" }}>
