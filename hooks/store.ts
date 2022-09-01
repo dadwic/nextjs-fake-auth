@@ -38,8 +38,8 @@ export const reducer = (
     case actionTypes.LOGOUT:
       return {
         ...state,
+        loading: true,
         email: exampleInitialState.email,
-        loading: exampleInitialState.loading,
       };
     default:
       return state;
