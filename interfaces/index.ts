@@ -1,5 +1,6 @@
 export type State = {
-  email: string;
+  email: string | null;
+  loading: boolean;
 };
 
 export type LoginFormInput = {

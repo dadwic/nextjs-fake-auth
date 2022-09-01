@@ -2,16 +2,14 @@ import React from "react";
 import * as yup from "yup";
 import Head from "next/head";
 import { useSnackbar } from "notistack";
-import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, FormProvider } from "react-hook-form";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import LoadingOverlay from "components/LoadingOverlay";
-import PasswordInput from "components/PasswordInput";
 import Input from "components/Input";
 import Link from "components/Link";
+import PasswordInput from "components/PasswordInput";
 import { login } from "hooks/store";
 import { LoginFormInput } from "interfaces";
 
@@ -26,33 +24,18 @@ const schema = yup
   .required();
 
 export default function SignIn() {
-  const router = useRouter();
-  const timer = React.useRef<number>();
-  const { enqueueSnackbar } = useSnackbar();
-  const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const methods = useForm<LoginFormInput>({
     resolver: yupResolver(schema),
   });
 
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
-
   const onSubmit = (data: any) => {
-    setLoading(true);
     dispatch(login(data.email));
-    enqueueSnackbar("You have successfully logged in.", { variant: "success" });
-    // Redirect to panel after 3 seconds
-    timer.current = window.setTimeout(() => {
-      setLoading(false);
-      router.push("/panel");
-    }, 3000);
+    enqueueSnackbar("You have successfully logged in.", {
+      variant: "success",
+    });
   };
-
-  if (loading) return <LoadingOverlay />;
 
   return (
     <FormProvider {...methods}>

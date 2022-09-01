@@ -5,8 +5,15 @@ import { red } from "@mui/material/colors";
 export const theme = createTheme({
   components: {
     MuiLink: {
-      defaultProps: {
-        sx: { color: "common.black", textDecoration: "none" },
+      styleOverrides: {
+        root: { color: "common.black", textDecoration: "none" },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        },
       },
     },
     MuiButton: {
