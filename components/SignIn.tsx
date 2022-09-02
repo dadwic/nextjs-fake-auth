@@ -1,4 +1,5 @@
 import React from "react";
+import type { LoginFormInput } from "interfaces";
 import * as yup from "yup";
 import Head from "next/head";
 import { useSnackbar } from "notistack";
@@ -11,7 +12,6 @@ import Input from "components/Input";
 import Link from "components/Link";
 import PasswordInput from "components/PasswordInput";
 import { login } from "hooks/store";
-import { LoginFormInput } from "interfaces";
 
 const schema = yup
   .object({
@@ -62,7 +62,12 @@ export default function SignIn() {
         <Link href="/auth/signup" variant="body2" display="block" align="right">
           Şifremi Unuttum
         </Link>
-        <Button fullWidth type="submit" variant="contained">
+        <Button
+          fullWidth
+          type="submit"
+          variant="contained"
+          data-testid="submit"
+        >
           Giriş Yap
         </Button>
       </Box>

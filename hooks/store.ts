@@ -7,7 +7,7 @@ import storage from "redux-persist/lib/storage";
 
 let store: any;
 
-const exampleInitialState: State = {
+export const exampleInitialState: State = {
   email: null,
   loading: false,
 };
@@ -65,7 +65,7 @@ const persistConfig = {
   whitelist: ["email"], // place to select which state you want to persist
 };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+export const persistedReducer = persistReducer(persistConfig, reducer);
 
 function makeStore(initialState = exampleInitialState) {
   return createStore(
@@ -101,3 +101,7 @@ export function useStore(initialState: any) {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 }
+
+export type RootState = ReturnType<typeof persistReducer>;
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppDispatch = AppStore["dispatch"];

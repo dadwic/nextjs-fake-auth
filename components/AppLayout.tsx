@@ -1,20 +1,18 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Avatar from "@mui/material/Avatar";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { a11yProps } from "utils/index";
 import { LOGIN_PATH, SIGNUP_PATH } from "constants/index";
 import TabPanel from "components/TabPanel";
 import Footer from "components/Footer";
 import SignIn from "components/SignIn";
 import SignUp from "components/SignUp";
-import { a11yProps } from "utils";
-import { Typography } from "@mui/material";
 
 export default function AppLayout() {
   const router = useRouter();

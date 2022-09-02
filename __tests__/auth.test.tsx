@@ -1,9 +1,6 @@
-import { render } from "@testing-library/react";
-import { withRouter } from "next/router";
+import { renderWithProviders } from "utils/test-utils";
 import AuthPage from "pages/auth/[slug]";
 
 it("renders unchanged", () => {
-  const wrapper = withRouter(() => <AuthPage />);
-  const { container } = render(<>{wrapper}</>);
-  expect(container).toMatchSnapshot();
+  renderWithProviders(<AuthPage />);
 });
