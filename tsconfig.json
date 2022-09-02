@@ -17,8 +17,8 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true,
     "paths": {
-      "hooks": ["hooks"],
-      "utils": ["utils"],
+      "hooks/*": ["hooks/*"],
+      "utils/*": ["utils/*"],
       "pages/*": ["pages/*"],
       "assets/*": ["assets/*"],
       "interfaces": ["interfaces"],

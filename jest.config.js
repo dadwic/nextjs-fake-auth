@@ -15,8 +15,8 @@ const customJestConfig = {
     "^interfaces": "<rootDir>/interfaces",
     "^assets/(.*)$": "<rootDir>/assets/$1",
     "^pages/(.*)$": "<rootDir>/pages/$1",
-    "^hooks": "<rootDir>/hooks",
-    "^utils": "<rootDir>/utils",
+    "^utils/(.*)$": "<rootDir>/utils/$1",
+    "^hooks/(.*)$": "<rootDir>/hooks/$1",
   },
   testEnvironment: "jest-environment-jsdom",
 };
