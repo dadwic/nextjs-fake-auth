@@ -80,7 +80,12 @@ export default function SignUp() {
           Şifrenizde en az bir harf, sayı veya özel karakter var Içermelidir.
           Ayrıca şifreniz en az 8 karakter olmalıdır. meydana gelmelidir.
         </Typography>
-        <Button fullWidth type="submit" variant="contained">
+        <Button
+          fullWidth
+          type="submit"
+          variant="contained"
+          data-testid="submit"
+        >
           Üye Ol
         </Button>
       </Box>
